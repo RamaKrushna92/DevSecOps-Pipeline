@@ -1,0 +1,22 @@
+{
+  "name": "devsecops-pipeline",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RamaKrushna92/DevSecOps-Pipeline.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RamaKrushna92/DevSecOps-Pipeline/issues"
+  },
+  "homepage": "https://github.com/RamaKrushna92/DevSecOps-Pipeline#readme",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
