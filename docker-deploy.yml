@@ -25,9 +25,9 @@
 
     - name: Does Container exist..?
       debug:
-        msg: "The node-app container is {{ 'exists' if result.containers else 'does not exist'}}"  # Fix logic for checking container existence
+        msg: "The node-app container is {{ 'exists' if result.container else 'does not exist'}}"  # Fix logic for checking container existence
 
     - name: Print the Container information
       debug:
-        var: result.containers
-      when: result.containers  # Checking if the container information exists
+        var: result.container
+      when: result.container  # Checking if the container information exists
