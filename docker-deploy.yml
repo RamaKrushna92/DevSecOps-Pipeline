@@ -18,7 +18,7 @@
         published_ports: 3000:3000
 
     - name: Get the Container info
-      docker_container_info:
+      community.docker.docker_container_info:
         name:node-app
       register: result
 
