@@ -9,6 +9,10 @@
         source: pull
         tag: jenkins-1
         
+    - name: Does Container exist..?
+      debug:
+        msg: "The node-app container is {{ 'exists' if result.container else 'does not exist'}}"  # Fix logic for checking container existence
+
     - name: Get the container ID of the node-app container
       docker_ps:
         name: node-app  # You can filter by container name here
