@@ -1,5 +1,5 @@
 ---
-- hosts: 18.206.38.173
+- hosts: 54.85.26.230
   become: yes
   gather_facts: false
   tasks:
