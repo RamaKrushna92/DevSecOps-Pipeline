@@ -1,0 +1,29 @@
+---
+- hosts: all
+  tasks:
+
+    - name: Pull Docker image
+      docker_image:
+        name: krishnachennaidocker/node-app-image
+        source: pull
+        tag: jenkins-1
+
+    - name: Start Docker Container
+      docker_container:
+        name: node-app
+        image: krishnachennaidocker/node-app-image:jenkins-1
+        state: started
+        published_ports: 3000:3000
+
+    - name: Get the Container info
+      docker_container_info:
+        name:node-app
+      register: result
+
+    - name: Does Container exist..?
+      debug:
+        msg: "The node-app caontainer is {{ 'exists' if result.exists else 'does not exists'}}"
+    - name: Print the Container information
+      debug:
+        var: result.container
+      when: result.exists
