@@ -15,17 +15,19 @@
         name: node-app
         image: krishnachennaidocker/node-app-image:jenkins-1
         state: started
-        published_ports: 3000:3000
+        published_ports:
+          - "3000:3000"  # Ensure published_ports is a list
 
     - name: Get the Container info
       community.docker.docker_container_info:
-        name:node-app
+        name: node-app  # Added space for correct YAML syntax
       register: result
 
     - name: Does Container exist..?
       debug:
-        msg: "The node-app caontainer is {{ 'exists' if result.exists else 'does not exists'}}"
+        msg: "The node-app container is {{ 'exists' if result.containers else 'does not exist'}}"  # Fix logic for checking container existence
+
     - name: Print the Container information
       debug:
-        var: result.container
-      when: result.exists
+        var: result.containers
+      when: result.containers  # Checking if the container information exists
