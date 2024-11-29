@@ -1,5 +1,7 @@
 ---
-- hosts: all
+- hosts: 18.206.38.173
+  become: yes
+  gather_facts: false
   tasks:
 
     - name: Pull Docker image
