@@ -11,7 +11,7 @@
         tag: jenkins-1
 
     - name: Get the container ID of the node-app container
-      docker_ps:
+      community.docker.docker_ps:
         name: node-app  # Filter by container name
         format: '{{ id }}'  # Only fetch the container ID
       register: container_info
