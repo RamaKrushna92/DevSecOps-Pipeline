@@ -5,7 +5,7 @@
   tasks:
   
     - name: Pull Docker image
-      docker_image:
+      community.docker.docker_image:
         name: krishnachennaidocker/node-app-image
         source: pull
         tag: jenkins-1
@@ -18,19 +18,19 @@
       failed_when: container_info.stdout == ""
 
     - name: Stop the container
-      docker_container:
+      community.docker.docker_container:
         name: "{{ container_info.stdout }}"
         state: stopped
       when: container_info.stdout != ""  # Only stop if the container exists
 
     - name: Remove the container
-      docker_container:
+      community.docker.docker_container:
         name: "{{ container_info.stdout }}"
         state: absent
       when: container_info.stdout != ""  # Only remove if the container exists
 
     - name: Start Docker Container
-      docker_container:
+      community.docker.docker_container:
         name: node-app
         image: krishnachennaidocker/node-app-image:jenkins-1
         state: started
