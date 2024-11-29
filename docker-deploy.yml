@@ -3,12 +3,30 @@
   become: yes
   gather_facts: false
   tasks:
-
     - name: Pull Docker image
       docker_image:
         name: krishnachennaidocker/node-app-image
         source: pull
         tag: jenkins-1
+        
+    - name: Get the container ID of the node-app container
+      docker_ps:
+        name: node-app  # You can filter by container name here
+        format: '{{ id }}'  # Only fetch the container ID
+      register: container_info
+      failed_when: container_info.stdout == ""  # Fail if no container is found
+      
+    - name: Stop the container
+      docker_container:
+        name: "{{ container_info.stdout }}"  # Use the container ID to stop
+        state: stopped
+      when: container_info.stdout != ""
+      
+    - name: Remove the container
+      docker_container:
+        name: "{{ container_info.stdout }}"  # Use the container ID to remove
+        state: absent
+      when: container_info.stdout != ""
 
     - name: Start Docker Container
       docker_container:
@@ -17,7 +35,7 @@
         state: started
         published_ports:
           - "3000:3000"  # Ensure published_ports is a list
-
+      
     - name: Get the Container info
       community.docker.docker_container_info:
         name: node-app  # Added space for correct YAML syntax
