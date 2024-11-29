@@ -12,10 +12,10 @@
 
     - name: Get the container ID of the node-app container
       community.docker.docker_ps:
-        name: node-app  # Filter by container name
+        name: node-app
         format: '{{ id }}'  # Only fetch the container ID
       register: container_info
-      failed_when: container_info.stdout == ""  # Fail if no container is found
+      failed_when: container_info.stdout == ""
 
     - name: Stop the container
       docker_container:
