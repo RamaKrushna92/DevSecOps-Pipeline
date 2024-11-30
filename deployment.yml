@@ -6,6 +6,8 @@
     # Step 1: Get list of running containers
     - name: Get list of running containers
       docker_container_info:
+        status: "running"
+        name: "node-app"
       register: running_containers
 
     # Step 2: Debug the list of running containers (optional)
