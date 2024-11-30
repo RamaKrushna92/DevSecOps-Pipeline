@@ -3,7 +3,7 @@
   become: yes
   gather_facts: false
   tasks:
-  
+
     - name: Pull Docker image
       community.docker.docker_image:
         name: krishnachennaidocker/node-app-image
@@ -17,17 +17,17 @@
           status: "running"
       register: docker_ps_result
 
-    - name: Stop the container
+    - name: Stop the container if running
       community.docker.docker_container:
-        name: "{{ container_info.stdout }}"
+        name: "{{ docker_ps_result.containers[0].Id }}"
         state: stopped
-      when: container_info.stdout != ""  # Only stop if the container exists
+      when: docker_ps_result.containers | length > 0  # Only stop if container exists
 
-    - name: Remove the container
+    - name: Remove the container if it exists
       community.docker.docker_container:
-        name: "{{ container_info.stdout }}"
+        name: "{{ docker_ps_result.containers[0].Id }}"
         state: absent
-      when: container_info.stdout != ""  # Only remove if the container exists
+      when: docker_ps_result.containers | length > 0  # Only remove if container exists
 
     - name: Start Docker Container
       community.docker.docker_container:
@@ -41,7 +41,7 @@
       community.docker.docker_container_info:
         name: node-app
       register: result
-      
+
     - name: Does Container exist..?
       debug:
         msg: "The node-app container is {{ 'exists' if result.containers else 'does not exist' }}"
