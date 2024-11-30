@@ -1,0 +1,38 @@
+---
+- name: Manage Docker containers
+  hosts: 54.85.26.230
+  tasks:
+    
+    # Step 1: List running containers and register their IDs
+    - name: Get list of running containers
+      docker_container:
+        state: "running"
+        capture_output: true
+      register: running_containers
+
+    # Step 2: Debug the list of running containers (optional)
+    - name: Debug list of running containers
+      debug:
+        var: running_containers
+
+    # Step 3: Remove each running container
+    - name: Stop and remove running containers
+      docker_container:
+        name: "{{ item.Id }}"
+        state: "absent"
+      loop: "{{ running_containers.containers }}"
+      when: running_containers.containers is defined and running_containers.containers | length > 0
+
+    # Step 4: Start the latest container
+    - name: Start the latest container
+      docker_container:
+        name: "{{ lookup('pipe', 'docker images -q --latest') }}"
+        state: started
+      when: lookup('pipe', 'docker images -q --latest') != ""
+      register: latest_container
+      failed_when: latest_container is not defined or latest_container.state != 'started'
+
+    # Step 5: Debug to verify the started container (optional)
+    - name: Debug latest container started
+      debug:
+        var: latest_container
