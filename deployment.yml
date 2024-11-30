@@ -1,6 +1,8 @@
 ---
 - name: Manage Docker containers
   hosts: 54.85.26.230
+  become: yes
+  gather_facts: false
   tasks:
     
     # Step 1: Get list of running containers
