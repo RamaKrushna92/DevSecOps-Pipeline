@@ -5,23 +5,22 @@
     
     # Step 1: Get list of running containers
     - name: Get list of running containers
-      docker_container_info:
-        status: "running"
-        name: "node-app"
+      command: docker ps -q
       register: running_containers
+      changed_when: false
 
     # Step 2: Debug the list of running containers (optional)
     - name: Debug list of running containers
       debug:
-        var: running_containers.containers
+        var: running_containers.stdout_lines
 
     # Step 3: Stop and remove each running container
     - name: Stop and remove running containers
       docker_container:
-        name: "{{ item.Id }}"
+        name: "{{ item }}"
         state: "absent"
-      loop: "{{ running_containers.containers }}"
-      when: running_containers.containers is defined and running_containers.containers | length > 0
+      loop: "{{ running_containers.stdout_lines }}"
+      when: running_containers.stdout_lines | length > 0
 
     # Step 4: Start the latest container
     - name: Start the latest container
