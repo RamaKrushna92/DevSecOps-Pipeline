@@ -7,7 +7,7 @@
     - name: Get infos on container
       community.docker.docker_container_info:
         name: node-app
-        image: krishnachennaidocker/node-app-image:jenkins-1
+        #image: krishnachennaidocker/node-app-image:jenkins-1
       register: result
     - name: Does container exist?
       debug:
