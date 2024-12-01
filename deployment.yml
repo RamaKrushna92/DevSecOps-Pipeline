@@ -28,13 +28,13 @@
       
     - name: Remove docker image
       community.docker.docker_image:
-        name: krishnachennaidocker/node-app-image:jenkins-10
+        name: krishnachennaidocker/node-app-image:jenkins-2
         state: absent
       
     - name: Pull Image and Start Docker Container
       community.docker.docker_container:
         name: node-app
-        image: krishnachennaidocker/node-app-image:jenkins-1
+        image: krishnachennaidocker/node-app-image:jenkins-2
         state: started
         published_ports:
           - 3000:3000
