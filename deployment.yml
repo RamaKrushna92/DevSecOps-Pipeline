@@ -11,7 +11,7 @@
       
     - name: Show gathered Docker images
       debug:
-        msg: "{{ ansible_facts.docker_image_info }}"
+        msg: "{{ docker_image_info }}"
         
     - name: Remove Docker image
       community.docker.docker_image:
