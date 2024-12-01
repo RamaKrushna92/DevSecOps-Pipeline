@@ -23,7 +23,7 @@
       community.docker.docker_container:
         name: node-app
         state: absent
-        var: result.container
+        #var: result.container
       when: result.exists
     - name: Pull Image and Start Docker Container
       community.docker.docker_container:
