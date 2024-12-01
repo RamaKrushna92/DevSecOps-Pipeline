@@ -5,7 +5,7 @@
   gather_facts: false
   tasks: 
     - name: Gather the existing images
-      community.docker.docker_image_facts:
+      community.docker.docker_images:
       
     - name: Show gathered Docker images
       debug:
