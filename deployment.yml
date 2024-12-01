@@ -1,10 +1,10 @@
 ---
-- name: Manage Docker containers
+- name: Docker Deployment Starting...
   hosts: 54.85.26.230
   become: yes
   gather_facts: false
   tasks:
-    - name: Get infos on container
+    - name: Get the existing information of node-app container
       community.docker.docker_container_info:
         name: node-app
         #image: krishnachennaidocker/node-app-image:jenkins-1
