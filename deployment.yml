@@ -6,8 +6,8 @@
   tasks: 
     - name: Gather the existing images
       community.docker.docker_image:
-        state: present
-        name: krishnachennaidocker/node-app-image
+        #state: present
+        name: krishnachennaidocker/node-app-image:jenkins-1
       register: docker_images
       
     - name: Show gathered Docker images
