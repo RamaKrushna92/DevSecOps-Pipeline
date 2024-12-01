@@ -18,11 +18,11 @@
         state: absent
         name: node-app-image:jenkins-1
         tag: jenkins-1
-      register: remove_images
+      register: result
       
     - name: Show Removed Image
       debug:
-        var: remove_images
+        var: result
         
     - name: Get the existing information of node-app container
       community.docker.docker_container_info:
