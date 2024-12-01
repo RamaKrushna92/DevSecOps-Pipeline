@@ -27,7 +27,7 @@
       when: result.exists
       
     - name: Remove docker image
-      docker_image:
+      community.docker.docker_image:
         name: krishnachennaidocker/node-app-image:jenkins-10
         state: absent
       
