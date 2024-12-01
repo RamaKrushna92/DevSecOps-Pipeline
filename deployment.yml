@@ -6,23 +6,23 @@
   tasks: 
     - name: Gather the existing images
       docker_image_info:
-        name: node-app-image
+        name: krishnachennaidocker/node-app-image
       register: result
       
     - name: Show gathered Docker images
       debug:
-        var: result.images
+        var: result.image
         
     - name: Remove Docker image
       community.docker.docker_image:
         state: absent
         name: node-app-image:jenkins-1
         tag: jenkins-1
-      register: remove_images
+      register: remove_image
       
     - name: Show Removed Image
       debug:
-        var: remove_images
+        var: remove_image
         
     - name: Get the existing information of node-app container
       community.docker.docker_container_info:
