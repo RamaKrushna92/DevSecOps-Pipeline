@@ -28,6 +28,7 @@
     - name: Pull Image and Start Docker Container
       community.docker.docker_container:
         name: node-app
+        source: pull
         image: krishnachennaidocker/node-app-image:jenkins-1
         state: started
         published_ports:
