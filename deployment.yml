@@ -3,32 +3,11 @@
   hosts: 54.85.26.230
   become: yes
   gather_facts: yes
-  tasks: 
-    - name: Gather the existing images
-      community.docker.docker_image:
-        #state: present
-        name: krishnachennaidocker/node-app-image:jenkins-1
-      register: docker_images
-      
-    - name: Show gathered Docker images
-      debug:
-        var: docker_images.images
-        
-    - name: Remove Docker image
-      community.docker.docker_image:
-        name: "{{ item.RepoTags[0] }}"
-        state: absent
-      loop: "{{ docker_images.images }}"
-      when: "'ubuntu' in item.RepoTags[0]"
-      
-#    - name: Show Removed Image
-#      debug:
-#        var: result
-        
+  tasks:         
     - name: Get the existing information of node-app container
       community.docker.docker_container_info:
         name: node-app
-      register: result.images
+      register: result
       
     - name: Does container exist?
       debug:
