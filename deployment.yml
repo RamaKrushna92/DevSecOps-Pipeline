@@ -11,18 +11,18 @@
       
     - name: Show gathered Docker images
       debug:
-        var: result.image
+        var: result
         
     - name: Remove Docker image
       community.docker.docker_image:
         state: absent
         name: node-app-image:jenkins-1
         tag: jenkins-1
-      register: remove_image
+      register: remove_images
       
     - name: Show Removed Image
       debug:
-        var: remove_image
+        var: remove_images
         
     - name: Get the existing information of node-app container
       community.docker.docker_container_info:
