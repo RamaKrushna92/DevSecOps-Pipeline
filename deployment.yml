@@ -3,36 +3,55 @@
   hosts: 54.85.26.230
   become: yes
   gather_facts: false
-  tasks:
+  tasks: 
+    - name: Gather the existing images
+      community.docker.docker_image_facts:
+      
+    - name: Show gathered Docker images
+      debug:
+        var: ansible_facts.docker_images
+        
+    - name: Remove Docker image
+      community.docker.docker_image:
+        state: absent
+        name: node-app-image:jenkins-1
+        tag: jenkins-1
+      register: remove_images
+      
+    - name: Show Removed Image
+      debug:
+        var: remove_images
+        
     - name: Get the existing information of node-app container
       community.docker.docker_container_info:
         name: node-app
-        #image: krishnachennaidocker/node-app-image:jenkins-1
       register: result
+      
     - name: Does container exist?
       debug:
-        #var: result.container
         msg: The container {{ 'exists' if result.exists else 'does not exist' }}
       when: result.exists
+      
     - name: Stop a container
       community.docker.docker_container:
         name: node-app
         state: stopped
       when: result.exists
+      
     - name: Remove container
       community.docker.docker_container:
         name: node-app
         state: absent
-        #var: result.container
       when: result.exists
+      
     - name: Pull Image and Start Docker Container
       community.docker.docker_container:
         name: node-app
-       # source: pull
         image: krishnachennaidocker/node-app-image:jenkins-1
         state: started
         published_ports:
           - 3000:3000
+          
     - name: Debug latest container started
       debug:
         var: latest_container
