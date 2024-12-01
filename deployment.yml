@@ -11,7 +11,7 @@
       register: result
     - name: Does container exist?
       debug:
-        var: result.container
+        #var: result.container
         msg: The container {{ 'exists' if result.exists else 'does not exist' }}
       when: result.exists
     - name: Stop a container
