@@ -2,7 +2,7 @@
 - name: Docker Deployment Starting...
   hosts: 54.85.26.230
   become: yes
-  gather_facts: false
+  gather_facts: yes
   tasks: 
     - name: Gather the existing images
       docker_image_info:
@@ -11,7 +11,7 @@
       
     - name: Show gathered Docker images
       debug:
-        var: result
+        msg: "{{ ansible_facts.docker_image_info }}"
         
     - name: Remove Docker image
       community.docker.docker_image:
