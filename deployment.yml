@@ -5,13 +5,13 @@
   gather_facts: yes
   tasks: 
     - name: Gather the existing images
-      docker_image_info:
+      community.docker.docker_image:
         name: krishnachennaidocker/node-app-image
       register: result
       
     - name: Show gathered Docker images
       debug:
-        msg: "{{ docker_image_info }}"
+        var: result
         
     - name: Remove Docker image
       community.docker.docker_image:
