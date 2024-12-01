@@ -5,11 +5,13 @@
   gather_facts: false
   tasks: 
     - name: Gather the existing images
-      community.docker.docker_images:
+      docker_image_info:
+        name: node-app-image
+      register: result
       
     - name: Show gathered Docker images
       debug:
-        var: ansible_facts.docker_images
+        var: result.images
         
     - name: Remove Docker image
       community.docker.docker_image:
