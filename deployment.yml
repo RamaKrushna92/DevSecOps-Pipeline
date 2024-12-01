@@ -26,6 +26,11 @@
         state: absent
       when: result.exists
       
+    - name: Remove docker image
+      docker_image:
+        name: krishnachennaidocker/node-app-image:jenkins-10
+        state: absent
+      
     - name: Pull Image and Start Docker Container
       community.docker.docker_container:
         name: node-app
