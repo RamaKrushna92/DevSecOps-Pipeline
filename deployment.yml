@@ -6,7 +6,7 @@
   tasks:
     
 - name: Get infos on container
-  docker_container_info:
+  community.docker.docker_container_info:
     name: node-app
   register: result
 
