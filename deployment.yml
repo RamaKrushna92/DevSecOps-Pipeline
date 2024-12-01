@@ -5,34 +5,39 @@
   gather_facts: false
   tasks:
     
-    # Step 1: Get list of running containers
-    - name: Get list of running containers
-      command: docker ps -q
-      register: running_containers
-      changed_when: false
+- name: Get infos on container
+  docker_container_info:
+    name: node-app
+  register: result
 
-    # Step 2: Debug the list of running containers (optional)
-    - name: Debug list of running containers
-      debug:
-        var: running_containers.stdout_lines
+- name: Does container exist?
+  debug:
+    var: result.container
+    msg: "The container {{ 'exists' if result.exists else 'does not exist' }}"
+  when: result.exists
+  
+- name: Stop a container
+  community.docker.docker_container:
+    name: node-app
+    state: stopped
+  when: result.exists
+  
+- name: Remove container
+  community.docker.docker_container:
+    name: node-app
+    state: absent
+    var: result.container
+  when: result.exists
 
-    # Step 3: Stop and remove each running container
-    - name: Stop and remove running containers
-      docker_container:
-        name: "{{ item }}"
-        state: "absent"
-      loop: "{{ running_containers.stdout_lines }}"
-      when: running_containers.stdout_lines | length > 0
+- name: Pull Image and Start Docker Container
+  community.docker.docker_container:
+    name: node-app
+    image: krishnachennaidocker/node-app-image:jenkins-1
+    state: started
+    published_ports:
+      - "3000:3000"  # Ensure published_ports is a list
 
-    - name: Start Docker Container
-      community.docker.docker_container:
-        name: node-app
-        image: krishnachennaidocker/node-app-image:jenkins-1
-        state: started
-        published_ports:
-          - "3000:3000"  # Ensure published_ports is a list
-
-    # Step 5: Debug to verify the started container (optional)
-    - name: Debug latest container started
-      debug:
-        var: latest_container
+# Step 5: Debug to verify the started container (optional)
+- name: Debug latest container started
+  debug:
+    var: latest_container
