@@ -24,14 +24,13 @@
       loop: "{{ running_containers.stdout_lines }}"
       when: running_containers.stdout_lines | length > 0
 
-    # Step 4: Start the latest container
-    - name: Start the latest container
-      docker_container:
-        name: "{{ lookup('pipe', 'docker images -q --latest') }}"
+    - name: Start Docker Container
+      community.docker.docker_container:
+        name: node-app
+        image: krishnachennaidocker/node-app-image:jenkins-1
         state: started
-      when: lookup('pipe', 'docker images -q --latest') != ""
-      register: latest_container
-      failed_when: latest_container is not defined or latest_container.state != 'started'
+        published_ports:
+          - "3000:3000"  # Ensure published_ports is a list
 
     # Step 5: Debug to verify the started container (optional)
     - name: Debug latest container started
