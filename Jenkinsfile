@@ -44,7 +44,7 @@ pipeline {
         }
         stage('Image Scan Trivy') {
             steps{
-                sh 'sudo trivy image krishnachennaidocker/node-app-image:jenkins-2'
+                sh 'sudo trivy image --security-checks vuln krishnachennaidocker/node-app-image:jenkins-2'
             }
         }
         stage('Login to DockerHub') {
