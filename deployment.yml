@@ -49,19 +49,10 @@
         msg: The container {{ 'exists' if result.exists else 'does not exist' }}
       when: result.exists
 
-    - name: Printing the container name..
-      ansible.builtin.debug:
-        msg: "Container name is {{ result.stdout | from_json | json_query('[0].Name') }}"
+    - name: find the information about container..
+      ansible.builtin.command: "sudo docker ps -a"
+      register: result
 
-    - name: Printing container status..
+    - name: Print the information about the conatiner
       ansible.builtin.debug:
-        msg: "Container status is {{ result.stdout | from_json | json_query('[0].State.Status') }}"
-
-    - name: Print container port number..
-      ansible.builtin.debug:
-        msg: "Container port is {{ result.stdout | from_json | json_query('[0].NetworkSettings.Ports') }}"
-
-    - name: Print all container details..
-      ansible.builtin.debug:
-        var: result.stdout | from_json
-      when: result.exists
+        var: result
