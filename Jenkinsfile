@@ -38,7 +38,8 @@ pipeline {
         }
         stage('Image Scan Trivy') {
             steps{
-                sh 'sudo trivy image --scanners vuln krishnachennaidocker/node-app-image:jenkins-2'
+               // sh 'sudo trivy image --scanners vuln krishnachennaidocker/node-app-image:jenkins-2'
+		sh 'sudo trivy image --scanners vuln --format html --output trivy-report.html krishnachennaidocker/node-app-image:jenkins-2'
             }
         }
         stage('Login to DockerHub') {
