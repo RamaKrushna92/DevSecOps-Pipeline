@@ -39,6 +39,17 @@
         published_ports:
           - 3000:3000
           
-    - name: Debug latest container started
+    - name: Checking the container status...
+      community.docker.docker_container_info:
+        name: node-app
+      register: result
+
+    - name: Does container exist..?
       debug:
-        var: latest_container
+        msg: The container {{ 'exists' if result.exists else 'does not exist' }}
+      when: result.exists
+
+    - name: Printing information about container..
+      ansible.builtin.debug:
+        var: result.container
+      when: result.exists
