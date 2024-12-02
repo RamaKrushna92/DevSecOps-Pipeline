@@ -42,6 +42,11 @@ pipeline {
                 sh "sudo docker images -a"
             }
         }
+        stage('Image Scan Trivy') {
+            steps{
+                sh 'sudo trivy --security-checks image krishnachennaidocker/node-app-image:jenkins-2'
+            }
+        }
         stage('Login to DockerHub') {
             steps{
             sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
