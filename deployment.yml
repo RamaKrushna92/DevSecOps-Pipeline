@@ -52,17 +52,14 @@
     - name: Printing the container name..
       ansible.builtin.debug:
         msg: "Container name is {{ result.stdout | from_json | json_query('[0].Name') }}"
-       when: result.exists
 
     - name: Printing container status..
       ansible.builtin.debug:
         msg: "Container status is {{ result.stdout | from_json | json_query('[0].State.Status') }}"
-       when: result.exists
 
     - name: Print container port number..
       ansible.builtin.debug:
         msg: "Container port is {{ result.stdout | from_json | json_query('[0].NetworkSettings.Ports') }}"
-       when: result.exists
 
     - name: Print all container details..
       ansible.builtin.debug:
