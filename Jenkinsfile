@@ -6,6 +6,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('krishnachennaidocker')
         ANSIBLE_PRIVATE_KEY = credentials('ansiblecredentials')
     }
+    stages{
         stage('Clean Workspace') {
             steps {
                 echo    '+++++++++++++ DevSecOps Pipeline Is Starting +++++++++++++'
