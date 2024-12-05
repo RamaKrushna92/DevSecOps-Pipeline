@@ -1,5 +1,32 @@
 # DevSecOps Automated CI/CD Pipeline
-This project focuses on building a seamless DevSecOps pipeline that integrates development, security, and deployment processes. The pipeline automates key actions, ensuring that code commits trigger a series of events, from version control to deployment, while also incorporating security scans to detect vulnerabilities early.
+Project Overview: Automated CI/CD Pipeline with Jenkins, Docker, trivy, Ansible, and AWS
+In this project, I set up a DevSecOps pipeline using AWS EC2, Jenkins, Docker, and Ansible to automate the process of application deployment.
+
+Key Components:
+AWS EC2 Instances:
+
+I created three AWS EC2 instances:
+One instance for the Jenkins master.
+Two instances for Jenkins slave architecture to distribute build tasks.
+Another EC2 instance was set up specifically for application deployment.
+Jenkins Pipeline:
+
+I configured a Jenkins pipeline for continuous integration (CI).
+A Jenkinsfile was written to define the steps of the pipeline, and the file was pushed to Git for version control.
+Ansible Playbook:
+
+Trivy image Security scan:
+Trivy installed and intgrated with jenins to perform the verified images vulnerbiltity scan.
+
+I wrote an Ansible playbook to automate the deployment of Docker images and the creation of containers.
+This playbook was pushed to Git and is executed as part of the deployment process.
+Port Configuration:
+
+I enabled the following ports on the EC2 instances:
+Port 22 for secure SSH connections.
+Port 8080 for Jenkins web access.
+Port 3000 for the Docker container to publish the application.
+This setup ensures an automated, secure, and efficient process for continuous integration and deployment, leveraging Jenkins for automation, Docker for containerization, and Ansible for configuration management.
 
   
 ![image](https://github.com/user-attachments/assets/f3d7a98f-e342-4c61-a7ed-03cae93c8d21)
