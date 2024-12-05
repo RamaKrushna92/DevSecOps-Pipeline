@@ -1,4 +1,4 @@
-# DevSecOps Automated CI/CD Pipeline
+#### DevSecOps Automated CI/CD Pipeline
 Project Overview: Automated CI/CD Pipeline with Jenkins, Docker, trivy, Ansible, and AWS
 In this project, I set up a DevSecOps pipeline using AWS EC2, Jenkins, Docker, and Ansible to automate the process of application deployment.
 
