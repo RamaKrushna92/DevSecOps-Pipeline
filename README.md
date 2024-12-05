@@ -7,7 +7,7 @@ This project focuses on building a seamless DevSecOps pipeline that integrates d
 **Workflow:**
 
   - Developers commit their changes to Git, triggering the webhook.
-  - Jenkins automatically starts the build process for both Java and Node.js components.
+  - Jenkins automatically starts the build process for both Node.js components.
   - Trivy performs security scans on Docker images to ensure no vulnerabilities are present.
   - The validated Docker image is pushed to a registry.
   - Ansible automates the deployment of the Docker image to AWS EC2 instances for live production.
