@@ -2,6 +2,17 @@
 Project Overview: Automated CI/CD Pipeline with Jenkins, Docker, trivy, Ansible, and AWS
 In this project, I set up a DevSecOps pipeline using AWS EC2, Jenkins, Docker, and Ansible to automate the process of application deployment.
 
+**Pre-Requisites:**
+i.Create 3 aws ec2 instances, 
+
+   integrate with Jenkins for one is for master, 
+
+   and second is for Jenkins node, for managing the job execution of job load and last one is for deploy the application.
+
+ii.Integrate the git with Jenkins, using the ssh keys for clone the repo.
+
+iii.Install Ansible and configure with Jenkins for continues Deploy. 
+
 **Key Components:**
 
 AWS EC2 Instances:
